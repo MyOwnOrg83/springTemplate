@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+
+<!-- Bootstrap Core CSS -->
+<link href="css3/bootstrap.min.css" rel="stylesheet"/>
+
+<!-- Custom CSS -->
+<link href="css3/1-col-portfolio.css" rel="stylesheet"/>
+
+
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div id="header"></div>
+	</nav>
+
+<form id="usrform">
+	<label>Vrat Master Id : </label>
+	<input type="text" id="vrat_master_id" name="vrat_master_id"/><br>
+	<label>Language : </label>
+	<input type="text" id="lang" name="lang"/><br>
+	<label>Process : </label>
+	<textarea name="process" form="usrform"></textarea><br>
+	<label>Item : </label>
+	<textarea name="item" form="usrform"></textarea><br>
+	<label>Content : </label>
+	<textarea name="content" form="usrform"></textarea><br>
+	<label>Context : </label>
+	<textarea name="context" form="usrform"></textarea><br>
+	<input type="button" value="submit" onclick=submitVratContent()><br>
+	</form>
+	
+<script>
+function submitVratContent() {
+	var postData = $("#usrform").serialize();
+    console.log(postData);
+    $.ajax({
+        type: "post",
+        url: "http://localhost:8080/datamgr/vratContent",
+        data: postData,
+        contentType: "application/x-www-form-urlencoded",
+        success: function(responseData, textStatus, jqXHR) {
+            alert("data saved with id : "+responseData.id)
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(errorThrown);
+        }
+    })
+}
+</script>
+<script> 
+	  $("#header").load("ppheader.html"); 
+	  //$("#footer").load("footer.html"); 
+	</script>
+</body>	
+</html>

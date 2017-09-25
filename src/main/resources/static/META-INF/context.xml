@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<context>
+    <Resource name="jdbc/MyAppDB" auth="Container" 
+        factory="org.apache.tomcat.jdbc.pool.DataSourceFactory" 
+        type="javax.sql.DataSource" 
+
+        initialSize="5" minIdle="5" maxActive="15" maxIdle="10"
+
+        testWhileIdle="true"
+            timeBetweenEvictionRunsMillis="30000"
+
+        testOnBorrow="true"
+            validationQuery="SELECT 1"
+            validationInterval="30000"
+
+
+        driverClassName="com.mysql.jdbc.Driver" 
+        url="jdbc:mysql://localhost:3306/ppdb" 
+        username="root" password="raka"
+    />
+</context>
