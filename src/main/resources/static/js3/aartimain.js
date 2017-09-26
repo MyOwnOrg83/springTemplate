@@ -1,10 +1,10 @@
-var baseLink = 'http://localhost:8080';
+//var baseLink = 'http://localhost:8080';
 var total;
 var pageId = 0;
 $(document).ready(function() {
 	
 	$.ajax({
-		url : baseLink + "/aartiCount",
+		url : "/aartiCount",
 		type : "GET",
 
 		dataType : 'json',
@@ -13,6 +13,9 @@ $(document).ready(function() {
 			// process it
 			console.log("aarti main is called"+resultData);
 			total = resultData;
+			pageIdElem = document.getElementById('currPageId');
+			pageId = pageIdElem.getAttribute('show-main')
+			return showPage(pageId);
 		},
 		error : function(jqXHR, textStatus, errorThrown) {
 			console.log("aarti main:Could not get pooja count");
@@ -21,10 +24,6 @@ $(document).ready(function() {
 
 		timeout : 120000,
 	});
-	
-	pageIdElem = document.getElementById('currPageId');
-	pageId = pageIdElem.getAttribute('show-main')
-	return showPage(pageId);
 });
 
 function getJsonFromUrl() {
@@ -67,7 +66,7 @@ function parseData(results) {
 
 function showPage(pageId) {
 	$.ajax({
-		url : baseLink + "/aartis/"+pageId,
+		url : "/aartis/"+pageId,
 		type : "GET",
 		async : 'false',
 		dataType : 'json',

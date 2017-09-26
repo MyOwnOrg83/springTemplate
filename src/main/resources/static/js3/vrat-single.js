@@ -48,7 +48,7 @@ function parseData(data) {
 	html ='';
 	var descElem = document.getElementById("desc");
 	var langSelectElem = document.getElementById("langSelected");
-	if(data.mainDesc) {
+	if(data.mainDesc && data.mainDesc.length) {
 		for(var i=0;i<data.mainDesc.length; i++) {
 			var result = data.mainDesc[i];
 			if(result.lang === 'HINDI') {
@@ -70,7 +70,7 @@ function parseData(data) {
 			}			
 		}
 	} else {
-		html += '<p class="dotted">' + data.shortDesc + '</p>';
+		html += '<p>' + data.shortDesc + '</p>';
 	}
 	descElem.innerHTML = html;
 }
