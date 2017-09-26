@@ -1143,6 +1143,10 @@ img {
 .img-circle {
   border-radius: 50%;
 }
+
+.wrapper { float: left; clear: left; display: table; table-layout: fixed; }
+.img-responsive-mod { display: table-cell; max-width: 100%; height: 300px; }
+
 hr {
   margin-top: 20px;
   margin-bottom: 20px;
