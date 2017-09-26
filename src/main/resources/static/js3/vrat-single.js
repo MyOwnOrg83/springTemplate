@@ -63,7 +63,7 @@ function parseData(data) {
 			var result = data.mainDesc[i];
 			
 			if(langSelectElem[langSelectElem.selectedIndex].value == result.lang) {
-				html += '<div id="'+ result.lang +'" style="display:block" <p>' + result.content + '</p></div>';
+				html += '<div id="'+ result.lang +'" style="display:block" class="text-justify" <p>' + result.content + '</p></div>';
 				$("#hdnPrevValue").val(result.lang);
 			} else {
 				html += '<div id="'+ result.lang +'" style="display:none" <p>' + result.content + '</p></div>';
