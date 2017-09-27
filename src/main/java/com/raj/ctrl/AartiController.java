@@ -2,6 +2,7 @@ package com.raj.ctrl;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
@@ -17,6 +18,7 @@ import com.raj.model.AartiBase;
 @RestController
 public class AartiController {
 
+	private static Logger log = Logger.getLogger(AartiController.class);
 	@Autowired
 	private AartiService dbServ;
 	
@@ -43,7 +45,7 @@ public class AartiController {
 		}
 		
 		Pageable page = new PageRequest(0, limit);
-		return dbServ.getLimitedAartis(page);
+		return dbServ.getLimitedAartis(page,-1L);
     }
 	
 	@RequestMapping("/aartiCount")
@@ -59,10 +61,24 @@ public class AartiController {
     	return count;
     }
 	
-	@RequestMapping("/aartis/{pageId}")
-	public @ResponseBody List<AartiBase> getAartiPerPage(@PathVariable("pageId") int pageId) {
+	@RequestMapping("/aartiCountByCat/{catId}")
+    public @ResponseBody int getAartiCount(@PathVariable("catId") Long catId) {
+    	int aartis = dbServ.getAartiCountByCategory(catId);
+    	int count = 0;
+    	if(aartis%elemPerPage == 0) {
+    		count = aartis/elemPerPage;
+    	} else {
+    		count = (aartis/elemPerPage) + 1;
+    	}
+    	
+    	return count;
+    }
+	
+	@RequestMapping("/aartis/{pageId}/{catId}")
+	public @ResponseBody List<AartiBase> getAartiPerPage(@PathVariable("pageId") int pageId, @PathVariable("catId") long catId) {
+		log.info("Getting List of aarti using "+elemPerPage+" elem per page and "+catId+" catId");
 		Pageable page = new PageRequest(pageId, elemPerPage);
-		List<AartiBase> aartis = dbServ.getLimitedAartis(page);
+		List<AartiBase> aartis = dbServ.getLimitedAartis(page, catId);
 		return aartis;
 	}
 	

@@ -22,8 +22,12 @@ public class AartiBase {
 	@Column(name="short_desc")
 	private String shortDesc;
 	
-	@OneToMany(targetEntity=AartiContent.class, mappedBy="aartiId", fetch=FetchType.EAGER)
+	@OneToMany(targetEntity=AartiContent.class, mappedBy="aartiId", fetch=FetchType.LAZY)
 	private List<AartiContent> mainDesc;
+	
+	@OneToMany(targetEntity=AartiCategory.class, mappedBy="aartiId", fetch=FetchType.LAZY)
+	private List<AartiCategory> aartiCats;
+	
 	@Column(name="icon_loc")
 	private String icon;
 	@Column(name="img_loc")
@@ -52,6 +56,12 @@ public class AartiBase {
 	}
 	public void setMainDesc(List<AartiContent> mainDesc) {
 		this.mainDesc = mainDesc;
+	}
+	public List<AartiCategory> getAartiCats() {
+		return aartiCats;
+	}
+	public void setAartiCats(List<AartiCategory> aartiCats) {
+		this.aartiCats = aartiCats;
 	}
 	public String getIcon() {
 		return icon;
