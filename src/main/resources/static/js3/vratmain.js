@@ -46,7 +46,7 @@ function parseData(results) {
 		html += '<div class="row">';
         html += '<div class="wrapper col-md-6">';
         html += '<a href="vrat-single.html?key='+result.id+'">';
-        html += '<img class="img-responsive-mod" src="'+ result.image+'" alt="">';
+        html += '<img class="img-responsive-mod-vrat" src="'+ result.image+'" alt="">';
         html += '</a>';
         html += '</div>';
         html += '<div class="col-md-6">';

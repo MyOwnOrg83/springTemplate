@@ -2,10 +2,7 @@ target/*
 ../spring*.zip
 ../spring*.zip
 /target/
-
-.classpath
-
-.project
-
-.settings/*
 logs/
+.settings/org.eclipse.core.resources.prefs .settings/org.eclipse.jdt.core.prefs .settings/org.eclipse.m2e.core.prefs .settings/org.eclipse.wst.common.project.facet.core.xml
+.classpath
+.project
