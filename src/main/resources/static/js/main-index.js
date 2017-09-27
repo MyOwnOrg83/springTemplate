@@ -65,9 +65,7 @@ function parseData(data, pageType) {
 		var d = data[i];
 		html += '<div class="col-lg-4 col-sm-6">'+
 		'<a href="'+ baseLink +'/'+ pageType +'-single.html?key='+ d.id +'" class="portfolio-box">'+
-//	    '<a href="'+ baseLink +'/pooja/'+ d.id +'" class="portfolio-box">'+
-//		'<a onclick="exportToForm('+ d.id +')" class="portfolio-box">'+
-	    '<img src="' + d.icon + '" class="img-responsive" alt="">'+
+	    '<img src="' + d.icon + '" class="img-responsive-mod" alt="">'+
 	    '<div class="portfolio-box-caption">'+
         '<div class="portfolio-box-caption-content">'+
         '<div class="project-category text-faded">'+
