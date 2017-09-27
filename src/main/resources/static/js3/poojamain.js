@@ -45,14 +45,14 @@ function parseData(results) {
 		var result = content[i];
 		console.log(result);
 		html += '<div class="row">';
-        html += '<div class="col-md-7">';
+        html += '<div class="col-md-6">';
         html += '<a href="pooja-single.html?key='+result.id+'">';
-        html += '<img class="img-responsive" src="'+ result.image+'" alt="">';
+        html += '<img class="img-responsive-mod-vrat" src="'+ result.image+'" alt="">';
         html += '</a>';
         html += '</div>';
-        html += '<div class="col-md-5">';
+        html += '<div class="col-md-6">';
         html += '<h3>'+result.name+'</h3>';
-        html += '<h4>About</h4>';
+      /*  html += '<h4>About</h4>'; */
         html += '<p>'+result.shortDesc+'</p>';
         html += '<a class="btn btn-primary" href="pooja-single.html?key='+result.id+'">View More <span class="glyphicon glyphicon-chevron-right"></span></a>';
         html += '</div>';
