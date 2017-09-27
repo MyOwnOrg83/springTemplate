@@ -1,5 +1,7 @@
 package com.raj.ctrl;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,8 +16,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.raj.db.PanditProfileService;
 import com.raj.db.VratService;
+import com.raj.model.CategoryBase;
 import com.raj.model.VratBase;
 import com.raj.model.VratContent;
+import com.raj.model.repo.CategoryMasterRepo;
 
 @Controller
 public class AppController {
@@ -26,12 +30,23 @@ public class AppController {
 	@Autowired
 	private VratService vServ;
 	
+	@Autowired
+	private CategoryMasterRepo catRepo;
+	
     @RequestMapping("/greeting")
     public String greeting(@RequestParam(value="name", required=false, defaultValue="World") String name, Map<String, Object> model) {
     	
     	System.out.println(dbServ.getAllPanditProfiles());
         model.put("name", dbServ.getAllPanditProfiles().getfName());
         return "greeting";
+    }
+    
+    @RequestMapping("/category")
+    public @ResponseBody List<CategoryBase> getAllCategory() {
+    	Iterable<CategoryBase> catItr = catRepo.findAll();
+		List<CategoryBase> catList = new ArrayList<>();
+		catItr.spliterator().forEachRemaining(p -> catList.add(p));
+		return catList;
     }
     
     @RequestMapping("/errorpage")

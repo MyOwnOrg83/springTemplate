@@ -1,6 +1,7 @@
 //var baseLink = 'http://localhost:8080';
 var total;
 var pageId = 0;
+var catId = 1;
 $(document).ready(function() {
 	
 	$.ajax({
@@ -24,7 +25,70 @@ $(document).ready(function() {
 
 		timeout : 120000,
 	});
+	
+	$.ajax({
+		url : "/category",
+		type : "GET",
+
+		dataType : 'json',
+		success : function(resultData) {
+			//here is your json.
+			// process it
+			console.log("cat is called"+resultData);
+			return setCategory(resultData);
+		},
+		error : function(jqXHR, textStatus, errorThrown) {
+			console.log("aarti main:Could not get pooja count");
+			window.location.href='/errorpage';
+		},
+
+		timeout : 120000,
+	});
 });
+
+function setCategory(cats) {
+	var filt = document.getElementById('filter');
+	var html = '<select id="catSelected" onchange="changeCategory()">'
+	for(var i in cats){
+		var cat = cats[i];
+		if((cat.type && cat.type.toUpperCase() == 'AARTI') || cat.name.toUpperCase() == "ALL" ) {
+			html += '<option value="'+ cat.id +'">'+ cat.name +'</option>';
+		}
+	}
+	html += '</select>';
+	$("#filter").html(html);	
+}
+
+function changeCategory() {
+	var selCategory = $("#catSelected").val();
+	console.log("selected category is "+ selCategory);
+	document.getElementById('filter').setAttribute('show-filt', selCategory);
+	$.ajax({
+		url : "/aartiCountByCat/"+selCategory,
+		type : "GET",
+		dataType : 'json',
+		success : function(resultData) {
+			//here is your json.
+			// process it
+			console.log("aarti count by cat is called "+resultData);
+			total = resultData;
+			pageIdElem = document.getElementById('currPageId');
+			pageId = pageIdElem.getAttribute('show-main')
+			
+			showPage(0);
+		},
+		error : function(jqXHR, textStatus, errorThrown) {
+			console.log("aarti main:Could not get pooja count");
+			window.location.href='/errorpage';
+		},
+
+		timeout : 120000,
+	});
+	/*var selCategory = $("#catSelected").val();
+	console.log("selected category is "+ selCategory);
+	document.getElementById('filter').setAttribute('show-filt', selCategory);
+	showPage(0);*/
+}
 
 function getJsonFromUrl() {
 	var query = location.search.substr(1);
@@ -38,7 +102,7 @@ function getJsonFromUrl() {
 
 function parseData(results) {
 	var $myDiv = $('<li>'); // create li 
-	var content = results[0].content;
+	var content = results;
 	for(var i in content){
 		var html = '';
 		var result = content[i];
@@ -65,8 +129,9 @@ function parseData(results) {
 }
 
 function showPage(pageId) {
+	catId = document.getElementById('filter').getAttribute('show-filt');
 	$.ajax({
-		url : "/aartis/"+pageId,
+		url : "/aartis/"+pageId+"/"+catId,
 		type : "GET",
 		async : 'false',
 		dataType : 'json',

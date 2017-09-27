@@ -17,6 +17,8 @@ public class AartiService {
 	@Autowired
 	private AartiMasterRepo repo;
 	
+	
+	
 	public @ResponseBody List<AartiBase> getAllAartis() {
 		// This returns a JSON or XML with the users
 		Iterable<AartiBase> aartiItr = repo.findAll();
@@ -29,7 +31,14 @@ public class AartiService {
 		return repo.findOne(id);
 	}
 	
-	public List<AartiBase> getLimitedAartis(Pageable page) {
-		return repo.findAll(page);
+	public List<AartiBase> getLimitedAartis(Pageable page, Long catId) {
+		return repo.findAll(page,catId);
+	}
+	
+	public @ResponseBody int getAartiCountByCategory(Long catId) {
+		if(catId != null && catId > 0) {
+			return repo.getCountByCategory(catId);
+		}
+		return getAllAartis().size();
 	}
 }

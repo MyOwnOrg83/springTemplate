@@ -8,40 +8,40 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "aarti_content")
-public class AartiContent {
+@Table(name = "aarti_category")
+public class AartiCategory {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	@Column(name="aarti_master_id")
-	private Long aartiId;
-	private String lang;
-	@Column(name="content")
-	private String content;
 	
+	@Column(name="aarti_id")
+	private Long aartiId;
+	
+	@Column(name="category_id")
+	private Long catId;
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public Long getAartiId() {
 		return aartiId;
 	}
+
 	public void setAartiId(Long aartiId) {
 		this.aartiId = aartiId;
 	}
-	public String getLang() {
-		return lang;
+
+	public Long getCatId() {
+		return catId;
 	}
-	public void setLang(String lang) {
-		this.lang = lang;
-	}
-	public String getContent() {
-		return content;
-	}
-	public void setContent(String content) {
-		this.content = content;
+
+	public void setCatId(Long catId) {
+		this.catId = catId;
 	}
 }
