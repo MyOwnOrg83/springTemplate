@@ -45,7 +45,7 @@ public class AartiController {
 		}
 		
 		Pageable page = new PageRequest(0, limit);
-		return dbServ.getLimitedAartis(page,-1L);
+		return dbServ.getLimitedAartis(page,1L);
     }
 	
 	@RequestMapping("/aartiCount")

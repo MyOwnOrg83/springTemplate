@@ -27,7 +27,7 @@ $(document).ready(function() {
 		success : function(resultData) {
 			//here is your json.
 			// process it
-			return parseData(resultData[0].content, 'aarti');
+			return parseData(resultData, 'aarti');
 		},
 		error : function(jqXHR, textStatus, errorThrown) {
 			console.log("error is called");
