@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -61,23 +62,29 @@ public class AartiController {
     	return count;
     }
 	
-	@RequestMapping("/aartiCountByCat/{catId}")
-    public @ResponseBody int getAartiCount(@PathVariable("catId") Long catId) {
+	@RequestMapping("/aartiCountByFilter/{catId}/{elemPage}")
+    public @ResponseBody int getAartiCount(@PathVariable("catId") Long catId, @PathVariable("elemPage") Integer elemPage) {
     	int aartis = dbServ.getAartiCountByCategory(catId);
     	int count = 0;
-    	if(aartis%elemPerPage == 0) {
-    		count = aartis/elemPerPage;
+    	if(StringUtils.isEmpty(elemPage)) {
+    		elemPage = elemPerPage;
+    	}
+    	if(aartis%elemPage == 0) {
+    		count = aartis/elemPage;
     	} else {
-    		count = (aartis/elemPerPage) + 1;
+    		count = (aartis/elemPage) + 1;
     	}
     	
     	return count;
     }
 	
-	@RequestMapping("/aartis/{pageId}/{catId}")
-	public @ResponseBody List<AartiBase> getAartiPerPage(@PathVariable("pageId") int pageId, @PathVariable("catId") long catId) {
-		log.info("Getting List of aarti using "+elemPerPage+" elem per page and "+catId+" catId");
-		Pageable page = new PageRequest(pageId, elemPerPage);
+	@RequestMapping("/aartis/{pageId}/{catId}/{elemPage}")
+	public @ResponseBody List<AartiBase> getAartiPerPage(@PathVariable("pageId") int pageId, @PathVariable("catId") long catId, @PathVariable("elemPage") Integer elemPage) {
+		log.info("Getting List of aarti using "+elemPage+" elem per page and "+catId+" catId");
+		if(StringUtils.isEmpty(elemPage)) {
+    		elemPage = elemPerPage;
+    	}
+		Pageable page = new PageRequest(pageId, elemPage);
 		List<AartiBase> aartis = dbServ.getLimitedAartis(page, catId);
 		return aartis;
 	}

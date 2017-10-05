@@ -33,7 +33,7 @@ $(document).ready(function() {
 			//here is your json.
 			// process it
 			console.log("cat is called"+resultData);
-			return setCategory(resultData);
+			return setFilter(resultData);
 		},
 		error : function(jqXHR, textStatus, errorThrown) {
 			console.log("aarti main:Could not get pooja count");
@@ -44,7 +44,7 @@ $(document).ready(function() {
 	});
 });
 
-function setCategory(cats) {
+function setFilter(cats) {
 	var filt = document.getElementById('filt-cat');
 	var html = '<h4>Category: </h4>';
 	html += '<button id="catSelected" class="btn btn-block btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Category <span class="caret"></span></button>';
@@ -52,20 +52,30 @@ function setCategory(cats) {
 	for(var i in cats){
 		var cat = cats[i];
 		if((cat.type && cat.type.toUpperCase() == 'AARTI') || cat.name.toUpperCase() == "ALL" ) {
-			html += '<li><a href="#" onclick="changeCategory('+ cat.id +', \''+ cat.name +'\')">'+ cat.name +'</a></li>';
+			html += '<li><a href="#" onclick="changeFilter(\'catSelected\','+ cat.id +', \''+ cat.name +'\')">'+ cat.name +'</a></li>';
 		}
 	}
 	html += '</ul>';	
 	filt.innerHTML = html;
 }
 
-function changeCategory(catId, catName) {
-	console.log("selected category is "+ catName);
-	var catElem = document.getElementById('catSelected');
-	catElem.innerHTML = catName+' <span class="caret"></span>';
-	document.getElementById('filt-cat').setAttribute('show-filt', catId);
+function changeFilter(filterId, itemId, itemName) {
+	console.log("selected filter is "+ filterId);
+	var currCatId = document.getElementById('filt-cat').getAttribute('show-filt');
+	var currItemPageCount = document.getElementById('filt-item').getAttribute('show-item');
+	if(filterId === 'catSelected') {
+		var elem = document.getElementById('catSelected');
+		elem.innerHTML = itemName+' <span class="caret"></span>';
+		document.getElementById('filt-cat').setAttribute('show-filt', itemId);
+		currCatId = itemId;
+	} else if(filterId === 'itemSelected') {
+		var elem = document.getElementById('itemSelected');
+		elem.innerHTML = itemName+' <span class="caret"></span>';
+		document.getElementById('filt-item').setAttribute('show-item', itemId);
+		currItemPageCount = itemId;
+	}
 	$.ajax({
-		url : "/aartiCountByCat/"+catId,
+		url : "/aartiCountByFilter/"+currCatId+"/"+currItemPageCount,
 		type : "GET",
 		dataType : 'json',
 		success : function(resultData) {
@@ -124,8 +134,9 @@ function parseData(results) {
 
 function showPage(pageId) {
 	catId = document.getElementById('filt-cat').getAttribute('show-filt');
+	itemPage = document.getElementById('filt-item').getAttribute('show-item');
 	$.ajax({
-		url : "/aartis/"+pageId+"/"+catId,
+		url : "/aartis/"+pageId+"/"+catId+"/"+itemPage,
 		type : "GET",
 		async : 'false',
 		dataType : 'json',
