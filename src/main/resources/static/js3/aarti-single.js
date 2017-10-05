@@ -44,6 +44,7 @@ function parseData(data) {
 
 	var headElem = document.getElementById("heading1");
 	html = '<div><h3>' + data.name + '</h3></div>';
+	html += '<div><p>' + data.shortDesc + '</p></div>';
 	headElem.innerHTML = html;
 	html ='';
 	var descElem = document.getElementById("desc");

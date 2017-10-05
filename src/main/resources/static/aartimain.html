@@ -48,13 +48,23 @@
         </div>
         <!-- /.row -->
 
-		<div class="row btn-block">
+		<div class="row"  class="col-md-6 col-sm-6 col-lg-6">
 				  
-	            <div id="filter" show-filt="1" class="dropdown col-md-2 col-sm-2 col-lg-2">
-	            	<button id="catSelected" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Category <span class="caret"></span></button>
+	            <div id="filter">
+	            	<div id="filt-cat" show-filt="1" class="col-md-2 dropdown">
+	            	<h4>Category: </h4>
+	            	<button id="catSelected" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Category <span class="caret"></span></button>
 	            	<ul class="dropdown-menu">
 	            		<li><a href="#">All</a>
 	            	</ul>
+	            	</div>
+	            	<div id="filt-item" show-item="1" class="col-md-2 dropdown">
+	            	<h4>Items/Page: </h4>
+	            	<button id="itemSelected" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Items/Page <span class="caret"></span></button>
+	            	<ul class="dropdown-menu">
+	            		<li><a href="#">3</a>
+	            	</ul>
+	            	</div>
                	</div>
            
              

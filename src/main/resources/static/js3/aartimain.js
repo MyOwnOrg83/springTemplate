@@ -6,7 +6,6 @@ $(document).ready(function() {
 	$.ajax({
 		url : "/aartiCount",
 		type : "GET",
-
 		dataType : 'json',
 		success : function(resultData) {
 			//here is your json.
@@ -46,8 +45,9 @@ $(document).ready(function() {
 });
 
 function setCategory(cats) {
-	var filt = document.getElementById('filter');
-	var html = '<button id="catSelected" class="btn btn-block btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Category <span class="caret"></span></button>';
+	var filt = document.getElementById('filt-cat');
+	var html = '<h4>Category: </h4>';
+	html += '<button id="catSelected" class="btn btn-block btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Category <span class="caret"></span></button>';
 	html += '<ul class="dropdown-menu dropdown-menu-right">';
 	for(var i in cats){
 		var cat = cats[i];
@@ -55,15 +55,15 @@ function setCategory(cats) {
 			html += '<li><a href="#" onclick="changeCategory('+ cat.id +', \''+ cat.name +'\')">'+ cat.name +'</a></li>';
 		}
 	}
-	html += '</ul>';
-	$("#filter").html(html);	
+	html += '</ul>';	
+	filt.innerHTML = html;
 }
 
 function changeCategory(catId, catName) {
 	console.log("selected category is "+ catName);
 	var catElem = document.getElementById('catSelected');
 	catElem.innerHTML = catName+' <span class="caret"></span>';
-	document.getElementById('filter').setAttribute('show-filt', catId);
+	document.getElementById('filt-cat').setAttribute('show-filt', catId);
 	$.ajax({
 		url : "/aartiCountByCat/"+catId,
 		type : "GET",
@@ -123,7 +123,7 @@ function parseData(results) {
 }
 
 function showPage(pageId) {
-	catId = document.getElementById('filter').getAttribute('show-filt');
+	catId = document.getElementById('filt-cat').getAttribute('show-filt');
 	$.ajax({
 		url : "/aartis/"+pageId+"/"+catId,
 		type : "GET",
