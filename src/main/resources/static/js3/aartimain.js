@@ -1,4 +1,3 @@
-//var baseLink = 'http://localhost:8080';
 var total;
 var pageId = 0;
 var catId = 1;
@@ -48,23 +47,25 @@ $(document).ready(function() {
 
 function setCategory(cats) {
 	var filt = document.getElementById('filter');
-	var html = '<select id="catSelected" onchange="changeCategory()">'
+	var html = '<button id="catSelected" class="btn btn-block btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Category <span class="caret"></span></button>';
+	html += '<ul class="dropdown-menu dropdown-menu-right">';
 	for(var i in cats){
 		var cat = cats[i];
 		if((cat.type && cat.type.toUpperCase() == 'AARTI') || cat.name.toUpperCase() == "ALL" ) {
-			html += '<option value="'+ cat.id +'">'+ cat.name +'</option>';
+			html += '<li><a href="#" onclick="changeCategory('+ cat.id +', \''+ cat.name +'\')">'+ cat.name +'</a></li>';
 		}
 	}
-	html += '</select>';
+	html += '</ul>';
 	$("#filter").html(html);	
 }
 
-function changeCategory() {
-	var selCategory = $("#catSelected").val();
-	console.log("selected category is "+ selCategory);
-	document.getElementById('filter').setAttribute('show-filt', selCategory);
+function changeCategory(catId, catName) {
+	console.log("selected category is "+ catName);
+	var catElem = document.getElementById('catSelected');
+	catElem.innerHTML = catName+' <span class="caret"></span>';
+	document.getElementById('filter').setAttribute('show-filt', catId);
 	$.ajax({
-		url : "/aartiCountByCat/"+selCategory,
+		url : "/aartiCountByCat/"+catId,
 		type : "GET",
 		dataType : 'json',
 		success : function(resultData) {
@@ -72,22 +73,16 @@ function changeCategory() {
 			// process it
 			console.log("aarti count by cat is called "+resultData);
 			total = resultData;
-			pageIdElem = document.getElementById('currPageId');
-			pageId = pageIdElem.getAttribute('show-main')
 			
 			showPage(0);
 		},
 		error : function(jqXHR, textStatus, errorThrown) {
-			console.log("aarti main:Could not get pooja count");
+			console.log("aarti main:Could not get aarti count by cat");
 			window.location.href='/errorpage';
 		},
 
 		timeout : 120000,
 	});
-	/*var selCategory = $("#catSelected").val();
-	console.log("selected category is "+ selCategory);
-	document.getElementById('filter').setAttribute('show-filt', selCategory);
-	showPage(0);*/
 }
 
 function getJsonFromUrl() {
@@ -115,7 +110,6 @@ function parseData(results) {
         html += '</div>';
         html += '<div class="col-md-6">';
         html += '<h3>'+result.name+'</h3>';
-//        html += '<h4>About</h4>';
         html += '<p>'+result.shortDesc+'</p>';
         html += '<a class="btn btn-primary" href="aarti-single.html?key='+result.id+'">View More <span class="glyphicon glyphicon-chevron-right"></span></a>';
         html += '</div>';

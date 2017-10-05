@@ -22,8 +22,8 @@
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
+	    <![endif]-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 
 <body>
@@ -40,23 +40,25 @@
         <div class="row">
             <div class="col-lg-12">
             	<div class="col-lg-6">
-                <h1 class="page-header">Aarti Collection
-                    <small>आरती संग्रह</small>
-                </h1>
+	                <h1 class="page-header">Aarti Collection
+	                    <small>आरती संग्रह</small>
+	                </h1>
                 </div>
-                <div class="col-lg-6">
-		            <h4>Filter: </h4>
-                
-		            <div id="filter" show-filt="1">
-		            	<select id="catSelected">
-							
-						</select>
-                	</div>
-	            </div>
             </div>
         </div>
         <!-- /.row -->
 
+		<div class="row btn-block">
+				  
+	            <div id="filter" show-filt="1" class="dropdown col-md-2 col-sm-2 col-lg-2">
+	            	<button id="catSelected" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Category <span class="caret"></span></button>
+	            	<ul class="dropdown-menu">
+	            		<li><a href="#">All</a>
+	            	</ul>
+               	</div>
+           
+             
+		</div>
         <!-- Projects Row -->
         <div id='myList' name='myList'></div>     
 		<div id='currPageId' show-main='0'></div> 
