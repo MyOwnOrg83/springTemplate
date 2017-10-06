@@ -74,7 +74,8 @@
 		<!-- Project One -->
 		<div class="row" style="-moz-user-select: none; -webkit-user-select: none; -ms-user-select: none; user-select: none; -o-user-select: none;"
 					unselectable="on" onselectstart="return false;"
-					onmousedown="return false;">
+					onmousedown="return false;"
+					>
 			<div class="col-md-9">
 			<div id="img" class="wrapper col-md-9">
 				<a href="#"> <img class="img-responsive-mod"
@@ -111,28 +112,28 @@
 		<hr>
 
 		<!-- Footer -->
-		<footer>
-			<div class="row">
+			<div id="footer" class="row">
 				<div class="col-lg-12">
 					<p>Copyright &copy; Your Website 2014</p>
 				</div>
 			</div>
 			<!-- /.row -->
-		</footer>
 
 	</div>
 	<!-- /.container -->
 
 	<!-- jQuery -->
 	<script src="js3/jquery.js"></script>
-	<script src="js3/aarti-single.js"></script>
+	
 
 	<!-- Bootstrap Core JavaScript -->
 	<script src="js3/bootstrap.min.js"></script>
+	
+	<script src="js3/aarti-single.js"></script>
 
 	<script> 
 	  $("#header").load("ppheader.html"); 
-	  //$("#footer").load("footer.html"); 
+	  $("#footer").load("footer.html"); 
 	</script>
 </body>
 
