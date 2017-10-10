@@ -37,7 +37,7 @@ function parseData(data) {
 
 	var imgElem = document.getElementById("img");
 	html = '<a href="#">';
-	html += '<img class="img-responsive" src="' + data.image + '" alt="">';
+	html += '<img class="img-responsive-mod" src="' + data.image + '" alt="">';
 	html += '</a>';
 	imgElem.innerHTML = html;
 
