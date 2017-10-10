@@ -32,11 +32,11 @@ $(document).ready(function() {
 		success : function(resultData) {
 			//here is your json.
 			// process it
-			console.log("cat is called"+resultData);
+			console.log("cat is called "+resultData);
 			return setFilter(resultData);
 		},
 		error : function(jqXHR, textStatus, errorThrown) {
-			console.log("aarti main:Could not get pooja count");
+			console.log("aarti main:Could not get aarti cat");
 			window.location.href='/errorpage';
 		},
 
@@ -62,7 +62,7 @@ function setFilter(cats) {
 	html = '<button id="itemSelected" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Items/Page <span class="caret"></span></button>';
 	html += '<ul class="dropdown-menu">';
 	html += '<li><a href="#" onclick="changeFilter(\'itemSelected\',3, \'Items on page\')">Items/Page</a></li>';
-	html +=	'<li><a href="#" onclick="changeFilter(\'itemSelected\',1, \'1\')">1</a></li>';
+	html +=	'<li><a href="#" onclick="changeFilter(\'itemSelected\',2, \'2\')">2</a></li>';
 	html += '<li><a href="#" onclick="changeFilter(\'itemSelected\',3, \'3\')">3</a></li>';
 	html += '<li><a href="#" onclick="changeFilter(\'itemSelected\',5, \'5\')">5</a></li>';
 	html += '<li><a href="#" onclick="changeFilter(\'itemSelected\',10, \'10\')">10</a></li>';
