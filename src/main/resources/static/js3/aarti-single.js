@@ -1,9 +1,8 @@
-var baseLink = 'http://localhost:8080';
 $(document).ready(function() {
 	var id = getJsonFromUrl().key;
 	console.log(id);
 	$.ajax({
-		url : baseLink + "/aarti/" + id,
+		url : "/aarti/" + id,
 		type : "GET",
 
 		dataType : 'json',
