@@ -11,7 +11,7 @@ Object.defineProperty(element, 'id', {
 	  }
 });
 
-/*setInterval(function() {
+setInterval(function() {
     checkStatus = 'off';
     console.log(element);
     console.clear();
@@ -21,14 +21,8 @@ Object.defineProperty(element, 'id', {
     if (window.console && (window.console.firebug || window.console.exception)) {
 //    	  alert("firebug is enabled");
     	}
-}, 1000);*/
+}, 1000);
 
-const { classes: Cc, interfaces: Ci, utils: Cu } = Components;
-Cu.import("resource://devtools/shared/Loader.jsm");
-var HUDService = devtools.require("devtools/client/webconsole/hudservice");
-
-var hud = HUDService.getBrowserConsole();
-hud.jsterm.clearOutput(true);
 
 // for any browser F12 and ctrl+u prevention
 $(document).bind("contextmenu",function(e) {
