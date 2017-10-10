@@ -3,11 +3,13 @@ package com.raj.ctrl;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,7 +19,9 @@ import com.raj.model.PoojaBase;
 
 @Controller
 public class PoojaController {	
-
+	
+	private static Logger log = Logger.getLogger(PoojaController.class);
+	
 	@Autowired
     private PoojaService dbServ;
 
@@ -44,7 +48,7 @@ public class PoojaController {
 		}
 		
 		Pageable page = new PageRequest(0, limit);
-		return dbServ.getLimitedPoojas(page);
+		return dbServ.getLimitedPoojas(page, 1L);
     }
 	
 	@RequestMapping("/poojaCount")
@@ -60,10 +64,30 @@ public class PoojaController {
     	return count;
     }
 	
-	@RequestMapping("/poojas/{pageId}")
-	public @ResponseBody List<PoojaBase> getPoojaPerPage(@PathVariable("pageId") int pageId) {
-		Pageable page = new PageRequest(pageId, elemPerPage);
-		List<PoojaBase> poojas = dbServ.getLimitedPoojas(page);
+	@RequestMapping("/poojaCountByFilter/{catId}/{elemPage}")
+    public @ResponseBody int getPoojaCount(@PathVariable("catId") Long catId, @PathVariable("elemPage") Integer elemPage) {
+    	int poojas = dbServ.getPoojaCountByCategory(catId);
+    	int count = 0;
+    	if(StringUtils.isEmpty(elemPage)) {
+    		elemPage = elemPerPage;
+    	}
+    	if(poojas%elemPage == 0) {
+    		count = poojas/elemPage;
+    	} else {
+    		count = (poojas/elemPage) + 1;
+    	}
+    	
+    	return count;
+    }
+	
+	@RequestMapping("/poojas/{pageId}/{catId}/{elemPage}")
+	public @ResponseBody List<PoojaBase> getPoojaPerPage(@PathVariable("pageId") int pageId, @PathVariable("catId") long catId, @PathVariable("elemPage") Integer elemPage) {
+		log.info("Getting List of aarti using "+elemPage+" elem per page and "+catId+" catId");
+		if(StringUtils.isEmpty(elemPage)) {
+    		elemPage = elemPerPage;
+    	}
+		Pageable page = new PageRequest(pageId, elemPage);
+		List<PoojaBase> poojas = dbServ.getLimitedPoojas(page, catId);
 		return poojas;
 	}
 	

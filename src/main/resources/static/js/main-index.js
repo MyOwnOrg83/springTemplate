@@ -10,7 +10,7 @@ $(document).ready(function() {
 			//here is your json.
 			// process it
 			console.log("this is called");
-			return parseData(resultData[0].content, 'pooja');
+			return parseData(resultData, 'pooja');
 		},
 		error : function(jqXHR, textStatus, errorThrown) {
 			console.log("error is called");
