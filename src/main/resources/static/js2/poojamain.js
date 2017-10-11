@@ -163,7 +163,7 @@ function showPage(pageId) {
 		},
 		error : function(jqXHR, textStatus, errorThrown) {
 			console.log("show page pooja main:error is called");
-//			window.location.href='/errorpage';
+			window.location.href='/errorpage';
 		},
 
 		timeout : 120000,

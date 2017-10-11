@@ -37,7 +37,7 @@ $(document).ready(function() {
 		},
 		error : function(jqXHR, textStatus, errorThrown) {
 			console.log("aarti main:Could not get aarti cat");
-			window.location.href='/errorpage';
+//			window.location.href='/errorpage';
 		},
 
 		timeout : 120000,
