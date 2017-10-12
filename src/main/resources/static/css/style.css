@@ -1,1 +1,4 @@
-#success_message{ display: none;}
+.main-margin {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
