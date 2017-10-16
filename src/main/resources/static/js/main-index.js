@@ -10,7 +10,7 @@ $(document).ready(function() {
 			//here is your json.
 			// process it
 			console.log("this is called");
-			return parseData(resultData[0].content, 'pooja');
+			return parseData(resultData, 'pooja');
 		},
 		error : function(jqXHR, textStatus, errorThrown) {
 			console.log("error is called");
@@ -44,7 +44,7 @@ $(document).ready(function() {
 		success : function(resultData) {
 			//here is your json.
 			// process it
-			return parseData(resultData[0].content, 'vrat');
+			return parseData(resultData, 'vrat');
 		},
 		error : function(jqXHR, textStatus, errorThrown) {
 			console.log("error is called");
@@ -63,13 +63,14 @@ function parseData(data, pageType) {
 //	var len = data.length;
 	for(var i=0; i<data.length; i++){
 		var d = data[i];
+		
 		html += '<div class="col-lg-4 col-sm-6">'+
 		'<a href="'+ baseLink +'/'+ pageType +'-single.html?key='+ d.id +'" class="portfolio-box">'+
 	    '<img src="' + d.icon + '" class="img-responsive-mod" alt="">'+
 	    '<div class="portfolio-box-caption">'+
         '<div class="portfolio-box-caption-content">'+
         '<div class="project-category text-faded">'+
-        'Pooja '+
+        	pageType +
         '</div>'+
         '<div class="project-name">'+
         d.name+
@@ -79,6 +80,13 @@ function parseData(data, pageType) {
 	html += '</div></div>';
 	
 	mainElem.innerHTML = html;
+}
+
+function toTitleCase(str) {
+    var lcStr = str.toLowerCase();
+    return lcStr.replace(/(?:^|\s)\w/g, function(match) {
+        return match.toUpperCase();
+    });
 }
 
 function exportToForm(id) {
@@ -103,3 +111,9 @@ function exportToForm(id) {
 	});
 	
 }
+
+$(document).ready(function () {
+    $("nav").find("li").on("click", "a", function () {
+        $('.navbar-collapse.in').collapse('hide');
+    });
+});

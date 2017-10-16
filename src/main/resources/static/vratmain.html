@@ -39,13 +39,41 @@
         <!-- Page Header -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">All Vrat page
-                    <small>Click each section for more information.</small>
+                <h1 class="page-header">Vrat Collection
+                    <small>व्रत संग्रह</small>
                 </h1>
             </div>
         </div>
         <!-- /.row -->
 
+		<!-- Filters -->
+		<div class="row">
+			<div id="filter">
+				
+					<div id="filt-cat" show-filt="1" class="col-md-3 dropdown">
+						<button id="catSelected" class="btn btn-primary dropdown-toggle btn-block"
+							type="button" data-toggle="dropdown">
+							Select Category <span></span>
+						</button>
+						<ul class="dropdown-menu">
+							<li><a href="#">All</a>
+						</ul>
+					</div>
+					<div id="filt-item" show-item="3" class="col-md-3 dropdown">
+						<button id="itemSelected" class="btn btn-primary dropdown-toggle"
+							type="button" data-toggle="dropdown">
+							Select Items/Page <span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu">
+							<li><a href="#"
+								onclick="changeFilter('itemSelected',3, '3')">3</a></li>
+						</ul>
+					</div>
+				
+			</div>
+		</div>
+		<!-- Filter End -->
+		
         <!-- Projects Row -->
         <div id='myList' name='myList'></div>     
 		<div id='currPageId' show-main='0'></div> 
@@ -62,18 +90,6 @@
                         <a href="#">1</a>
                     </li>
                     <li>
-                        <a href="#">2</a>
-                    </li>
-                    <li>
-                        <a href="#">3</a>
-                    </li>
-                    <li>
-                        <a href="#">4</a>
-                    </li>
-                    <li>
-                        <a href="#">5</a>
-                    </li>
-                    <li>
                         <a href="#">&raquo;</a>
                     </li>
                 </ul>
@@ -82,8 +98,6 @@
         <!-- /.row -->
 
         <hr>
-
-        <!-- Footer -->
         
     </div>
     <!-- Footer -->

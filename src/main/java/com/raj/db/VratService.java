@@ -34,8 +34,15 @@ public class VratService {
 		return repo.findOne(id);
 	}
 	
-	public List<VratBase> getLimitedVrats(Pageable page) {
-		return repo.findAll(page);
+	public List<VratBase> getLimitedVrats(Pageable page, Long catId) {
+		return repo.findAll(page, catId);
+	}
+	
+	public @ResponseBody int getVratCountByCategory(Long catId) {
+		if(catId != null && catId > 0) {
+			return repo.getCountByCategory(catId);
+		}
+		return getAllVrats().size();
 	}
 	
 	public VratBase saveMasterData(VratBase baseData) {

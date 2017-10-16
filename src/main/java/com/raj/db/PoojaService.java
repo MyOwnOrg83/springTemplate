@@ -28,7 +28,14 @@ public class PoojaService {
 		return repo.findOne(id);
 	}
 
-	public List<PoojaBase> getLimitedPoojas(Pageable page) {
-		return repo.findAll(page);
+	public List<PoojaBase> getLimitedPoojas(Pageable page, Long catId) {
+		return repo.findAll(page, catId);
+	}
+	
+	public @ResponseBody int getPoojaCountByCategory(Long catId) {
+		if(catId != null && catId > 0) {
+			return repo.getCountByCategory(catId);
+		}
+		return getAllPoojas().size();
 	}
 }

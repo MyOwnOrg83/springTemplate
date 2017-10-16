@@ -32,12 +32,12 @@ $(document).ready(function() {
 		success : function(resultData) {
 			//here is your json.
 			// process it
-			console.log("cat is called"+resultData);
+			console.log("cat is called "+resultData);
 			return setFilter(resultData);
 		},
 		error : function(jqXHR, textStatus, errorThrown) {
-			console.log("aarti main:Could not get pooja count");
-			window.location.href='/errorpage';
+			console.log("aarti main:Could not get aarti cat");
+//			window.location.href='/errorpage';
 		},
 
 		timeout : 120000,
@@ -46,9 +46,9 @@ $(document).ready(function() {
 
 function setFilter(cats) {
 	var filt = document.getElementById('filt-cat');
-	var html = '<h4>Category: </h4>';
-	html += '<button id="catSelected" class="btn btn-block btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Category <span class="caret"></span></button>';
-	html += '<ul class="dropdown-menu dropdown-menu-right">';
+	var html = '<button id="catSelected" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Category <span class="caret"></span></button>';
+	html += '<ul class="dropdown-menu">';
+	html += '<li><a href="#" onclick="changeFilter(\'catSelected\',1, \'Category\')">Category</a></li>';
 	for(var i in cats){
 		var cat = cats[i];
 		if((cat.type && cat.type.toUpperCase() == 'AARTI') || cat.name.toUpperCase() == "ALL" ) {
@@ -56,6 +56,18 @@ function setFilter(cats) {
 		}
 	}
 	html += '</ul>';	
+	filt.innerHTML = html;
+	
+	filt = document.getElementById('filt-item');
+	html = '<button id="itemSelected" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Items/Page <span class="caret"></span></button>';
+	html += '<ul class="dropdown-menu">';
+	html += '<li><a href="#" onclick="changeFilter(\'itemSelected\',3, \'Items on page\')">Items/Page</a></li>';
+	html +=	'<li><a href="#" onclick="changeFilter(\'itemSelected\',2, \'2\')">2</a></li>';
+	html += '<li><a href="#" onclick="changeFilter(\'itemSelected\',3, \'3\')">3</a></li>';
+	html += '<li><a href="#" onclick="changeFilter(\'itemSelected\',5, \'5\')">5</a></li>';
+	html += '<li><a href="#" onclick="changeFilter(\'itemSelected\',10, \'10\')">10</a></li>';
+	html += '</ul>';
+	
 	filt.innerHTML = html;
 }
 

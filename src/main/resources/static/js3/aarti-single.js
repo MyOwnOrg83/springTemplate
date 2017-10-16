@@ -1,9 +1,8 @@
-var baseLink = 'http://localhost:8080';
 $(document).ready(function() {
 	var id = getJsonFromUrl().key;
 	console.log(id);
 	$.ajax({
-		url : baseLink + "/aarti/" + id,
+		url : "/aarti/" + id,
 		type : "GET",
 
 		dataType : 'json',
@@ -38,7 +37,7 @@ function parseData(data) {
 
 	var imgElem = document.getElementById("img");
 	html = '<a href="#">';
-	html += '<img class="img-responsive" src="' + data.image + '" alt="">';
+	html += '<img class="img-responsive-mod" src="' + data.image + '" alt="">';
 	html += '</a>';
 	imgElem.innerHTML = html;
 
