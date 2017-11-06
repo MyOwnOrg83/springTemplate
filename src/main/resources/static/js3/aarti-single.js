@@ -33,36 +33,61 @@ function getJsonFromUrl() {
 }
 
 function parseData(data) {
-	document.title += ' - ' + data.name;
-
-	var imgElem = document.getElementById("img");
-	html = '<a href="#">';
-	html += '<img class="img-responsive-mod" src="' + data.image + '" alt="">';
-	html += '</a>';
-	imgElem.innerHTML = html;
-
-	var headElem = document.getElementById("heading1");
-	html = '<div><h3>' + data.name + '</h3></div>';
-	html += '<div><p>' + data.shortDesc + '</p></div>';
-	headElem.innerHTML = html;
-	html ='';
-	var descElem = document.getElementById("desc");
-	var langSelectElem = document.getElementById("langSelected");
-	if(data.mainDesc) {
-		for(var i=0;i<data.mainDesc.length; i++) {
-			var result = data.mainDesc[i];
-			
-			if(langSelectElem[langSelectElem.selectedIndex].value == result.lang) {
-				html += '<div id="'+ result.lang +'" style="display:block" <p>' + result.content + '</p></div>';
-				$("#hdnPrevValue").val(result.lang);
-			} else {
-				html += '<div id="'+ result.lang +'" style="display:none" <p>' + result.content + '</p></div>';
-			}			
+	if(data) {
+		var html = '';
+		// set page title
+		// page heading and desc.
+		if(data.name) {
+			document.title += ' - ' + data.name;
+			var headElem = document.getElementById("heading1");
+			html = '<div><h3>' + data.name + '</h3></div>';
+			if(data.shortDesc) {
+				html += '<div><p>' + data.shortDesc + '</p></div>';
+			}
+			headElem.innerHTML = html;
+			html ='';
 		}
-	} else {
-		html += '<p class="dotted">' + data.shortDesc + '</p>';
+	
+		var descElem = document.getElementById("desc");
+		var langSelectElem = document.getElementById("langSelected");
+		var descHtml = '';
+		// set language drop-down and main data
+		if(data.mainDesc && data.mainDesc.length) {
+			for(var i=0;i<data.mainDesc.length; i++) {
+				var result = data.mainDesc[i];
+				if(result.prefLang) {
+					html += '<option value="'+result.lang+'" selected="selected">'+toTitleCase(result.lang)+'</option>';
+					descHtml += '<div id="'+ result.lang +'" style="display:block" <p>' + result.content + '</p></div>';
+					$("#hdnPrevValue").val(result.lang);
+				} else {
+					html += '<option value="'+result.lang+'">'+toTitleCase(result.lang)+'</option>';
+					descHtml += '<div id="'+ result.lang +'" style="display:none" <p>' + result.content + '</p></div>';
+				}
+			}
+			langSelectElem.innerHTML = html;
+			html = '';
+		} else {
+			descHtml += '<p class="dotted">No data found</p>';
+		}
+		descElem.innerHTML = descHtml;
+		
+		// set main image
+		if(data.image) {
+			var imgElem = document.getElementById("img");
+			html = '<a href="#">';
+			html += '<img class="img-responsive-mod" src="' + data.image + '" alt="">';
+			html += '</a>';
+			imgElem.innerHTML = html;
+			html = '';
+		}
 	}
-	descElem.innerHTML = html;
+}
+
+function toTitleCase(str) {
+    var lcStr = str.toLowerCase();
+    return lcStr.replace(/(?:^|\s)\w/g, function(match) {
+        return match.toUpperCase();
+    });
 }
 
 function getContent() {

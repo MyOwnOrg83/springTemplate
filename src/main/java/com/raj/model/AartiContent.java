@@ -19,6 +19,8 @@ public class AartiContent {
 	private String lang;
 	@Column(name="content")
 	private String content;
+	@Column(name="pref_lang")
+	private boolean prefLang;
 	
 	public Long getId() {
 		return id;
@@ -43,5 +45,11 @@ public class AartiContent {
 	}
 	public void setContent(String content) {
 		this.content = content;
+	}
+	public boolean isPrefLang() {
+		return prefLang;
+	}
+	public void setPrefLang(boolean prefLang) {
+		this.prefLang = prefLang;
 	}
 }
