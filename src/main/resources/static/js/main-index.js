@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
 	$.ajax({
-		url : "/mainpoojas/3",
+		url : "/mainpoojas/4",
 		type : "GET",
 
 		dataType : 'json',
@@ -19,7 +19,7 @@ $(document).ready(function() {
 	});
 	
 	$.ajax({
-		url : "/mainaartis/3",
+		url : "/mainaartis/4",
 		type : "GET",
 
 		dataType : 'json',
@@ -36,7 +36,7 @@ $(document).ready(function() {
 	});
 	
 	$.ajax({
-		url : "/mainvrats/3",
+		url : "/mainvrats/4",
 		type : "GET",
 
 		dataType : 'json',
@@ -53,7 +53,7 @@ $(document).ready(function() {
 	});
 	
 	$.ajax({
-		url : "/mainchalisas/3",
+		url : "/mainchalisas/4",
 		type : "GET",
 
 		dataType : 'json',
@@ -81,7 +81,7 @@ function parseData(data, pageType) {
 	for(var i=0; i<data.length; i++){
 		var d = data[i];
 		
-		html += '<div class="col-lg-4 col-sm-6">'+
+		html += '<div class="col-lg-3 col-sm-6">'+
 		'<a href="/'+ pageType +'-single.html?key='+ d.id +'" class="portfolio-box">'+
 	    '<img src="' + d.icon + '" class="img-responsive-mod" alt="">'+
 	    '<div class="portfolio-box-caption">'+
